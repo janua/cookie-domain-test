@@ -3,6 +3,7 @@ from flask import render_template, make_response, request
 app = Flask(__name__)
 
 USER_AGENTS = dict()
+STATE = dict()
 
 @app.route("/")
 def index():
