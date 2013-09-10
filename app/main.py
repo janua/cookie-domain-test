@@ -4,7 +4,7 @@ app = Flask(__name__)
 
 USER_AGENTS = dict()
 
-DOMAIN_ONE = 'www.test.com'
+DOMAIN_ONE = 'http://www.test.com'
 DOMAIN_TWO = 'http://www.xyz.com'
 
 @app.route("/")
