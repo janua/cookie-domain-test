@@ -25,15 +25,14 @@ def redirect_route():
     host = request.headers.get('Host')
 
     if host == DOMAIN_ONE:
-        root_redirect = make_response(redirect('/'))        
-        other_domain_redirect = make_response(redirect('http://' + DOMAIN_TWO + '/redirect'))
-
-        root_redirect.set_cookie('AlreadySeen', 'True')
-        other_domain_redirect.set_cookie('AlreadySeen', 'True')
-
         if request.cookies.get('AlreadySeen') == 'True':
+            root_redirect = make_response(redirect('/'))
+            root_redirect.set_cookie('AlreadySeen', 'True')
             return root_redirect
+        
         else:
+            other_domain_redirect = make_response(redirect('http://' + DOMAIN_TWO + '/redirect'))
+            other_domain_redirect.set_cookie('AlreadySeen', 'True')
             return other_domain_redirect
 
     elif host == DOMAIN_TWO:
