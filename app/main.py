@@ -4,8 +4,8 @@ app = Flask(__name__)
 
 USER_AGENTS = dict()
 
-DOMAIN_ONE = 'http://www.test.com'
-DOMAIN_TWO = 'http://www.xyz.com'
+DOMAIN_ONE = 'www.newdomain.com'
+DOMAIN_TWO = 'www.olddomain.com'
 
 @app.route("/")
 def index():
