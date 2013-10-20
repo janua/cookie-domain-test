@@ -20,6 +20,29 @@ def index():
     response = make_response(response_string)
     return response
 
+@app.route("/redirect")
+def redirect_route():
+    host = request.headers.get('Host')
+
+    if host == DOMAIN_ONE:
+        root_redirect = make_response(redirect('/'))        
+        other_domain_redirect = make_response(redirect('http://' + DOMAIN_TWO + '/redirect'))
+
+        root_redirect.set_cookie('AlreadySeen', 'True')
+        other_domain_redirect.set_cookie('AlreadySeen', 'True')
+
+        if request.cookies.get('AlreadySeen') == 'True':
+            return root_redirect
+        else:
+            return other_domain_redirect
+
+    elif host == DOMAIN_TWO:
+        bounce_back_redirect = make_response(redirect('http://' + DOMAIN_ONE + '/redirect'))
+        bounce_back_redirect.set_cookie('Carry', 'True')
+        return bounce_back_redirect
+
+    return make_response('Hosts setup incorrectly')
+
 
 if __name__ == "__main__":
     app.debug = True
