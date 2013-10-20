@@ -25,6 +25,11 @@ def redirect_route():
     host = request.headers.get('Host')
 
     if host == DOMAIN_ONE:
+        if 'Carry' in request.cookies:
+            USER_AGENTS[request.headers.get('User-Agent')] = True
+        else:
+            USER_AGENTS[request.headers.get('User-Agent')] = False
+
         if request.cookies.get('AlreadySeen') == 'True':
             root_redirect = make_response(redirect('/'))
             root_redirect.set_cookie('AlreadySeen', 'True')
