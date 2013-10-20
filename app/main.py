@@ -17,14 +17,9 @@ def index():
     user_agent = request.headers.get('User-Agent')
     host = request.headers.get('Host')
 
-    if user_agent not in USER_AGENTS.keys() and host == DOMAIN_ONE:
-        USER_AGENTS[user_agent] = True
-        return redirect(DOMAIN_TWO)
-    else:        
-        response = make_response(response_string)
-        response.set_cookie("test", "string")
+    response = make_response(response_string)
+    return response
 
-        return response
 
 if __name__ == "__main__":
     app.debug = True
